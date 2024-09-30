@@ -14,7 +14,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
-
   </head>
   <body>
 	<h1>My Community Map</h1>
@@ -24,7 +23,7 @@
 <p><strong>On the map below you can click between various layers of the map to see data about Ohio.</strong></p>
 
 <img
-  src="/Users/laneshirrell/Desktop/web-projects/test-site/images/school-integration.png"
+  src="images/image1.png"
   alt="Image of Black and white <abbr>CCSD</abbr> (Columbus City School District) school children playing together." 
 width="800"
 height="400"/>
@@ -46,8 +45,26 @@ height="400"/>
 <p><iframe src="https://docs.google.com/document/d/1c_rAHQ2utjdNRCasHvDCpLQWLIu0NOdlb1_awqw1bFE/pub?embedded=true"
 width="600"
 height="400"></iframe></p>
- 
 
+<button>Change user</button>
+
+myButton.onclick = () => {
+  setUserName();
+};
+
+ 
+<script src="scripts/main.js"></script>
+<script type="module" src="script.js"></script>
+
+var map = L.map('map').setView([51.505, -0.09], 13);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker([51.5, -0.09]).addTo(map)
+    .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+    .openPopup();
 
 </body>
 </html>
