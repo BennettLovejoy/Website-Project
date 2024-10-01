@@ -1,70 +1,107 @@
-
+<!--declaring the type of document (HTML)-->
 <!doctype html>
 <html lang="en-US">
-  <head>
-    <meta charset="utf-8" />
-    <title>My test page</title>
-<link href="styles/styles.css" rel="stylesheet" />
-<link
-  href="https://fonts.googleapis.com/css?family=Open+Sans"
-  rel="stylesheet" />
 
-<!--<p> This is the link to the Playfair Display Google API</p> -->
+<!-- create "head" section of HTML document where I'll input links to 
+ my other documents that make up this website -->
+<head>
+    <meta name="author" content="Bennett Lovejoy" />
+    <meta name="description" content="Community Mapping aims to 
+    provide complete beginners to data analysis and public policy with 
+    a tool that can help them visualize and better understand their communities." />
+    <meta charset="utf-8" />
+    <title>Community Mapping Landing Page</title>
+    
+<!--Linking the Playfair Font-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
-  </head>
-  <body>
-	<h1>My Community Map</h1>
-<p>My name is Bennett Lovejoy and I am a data-driven policy analyst.</p> 
-<p>I made this website so that young scholars, teachers, administrators, citizens, researchers, and policymakers alike can interact with data about their community.</p> 
-<p>The first part of this project focused on economic and social indicators of community wellness. 
-<p><strong>On the map below you can click between various layers of the map to see data about Ohio.</strong></p>
+<!--Linking to Leaflet-->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+crossorigin=""/>
 
-<img
-  src="images/image1.png"
-  alt="Image of Black and white <abbr>CCSD</abbr> (Columbus City School District) school children playing together." 
-width="800"
-height="400"/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""></script>
 
-<p>This data was obtained from the: </p>
-<p><ul>
-  <li><a href="https://nces.ed.gov/datalab/">National Center for Education Statistics</a></li>
-  <li><a href="https://data.census.gov/">United States Census Bureau</a></li></p>
+<!-- Load Map Components from CDN-->
+<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.30/"></script>
+<script type="module" src="https://js.arcgis.com/map-components/4.30/arcgis-map-components.esm.js"></script>
 
-<p>You can reach Bennett at:</p>
 
-<ul>
-  <li><a href="https://www.linkedin.com/in/lovejoybennett/">LinkedIn</a></li>
-  <li><a href="https://medium.com/@lovejoybennett">Medium</a></li>
-  <li><a href="mailto:lovejoybennett@gmail.com">Email</a></li>
-  <li><a href="tel:+16143073351">Phone</a></li>
-</ul>
+<style>
+    body {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+    }
+  </style>
 
-<p><iframe src="https://docs.google.com/document/d/1c_rAHQ2utjdNRCasHvDCpLQWLIu0NOdlb1_awqw1bFE/pub?embedded=true"
-width="600"
-height="400"></iframe></p>
+<!--<I don't have an Icon yet to symbolize my website but I am holding the code here for when I do.
+    link rel="icon" href="favicon.ico" type="image/ohio-icon" />
+    <link rel="icon" href="/favicon-48x48.[some hex hash].png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.[some hex hash].png" />
 
-<button>Change user</button>
+// COPYING THIS CODE TO ENSURE ICON COMPATIBILITY WITH APPLE PRODUCTS
+iPad Pro with high-resolution Retina display: 
+<link
+  rel="apple-touch-icon"
+  sizes="167x167"
+  href="/apple-touch-icon-167x167.png" />
+3x resolution iPhone:
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="/apple-touch-icon-180x180.png" /> 
+non-Retina iPad, iPad mini, etc.: 
+<link
+  rel="apple-touch-icon"
+  sizes="152x152"
+  href="/apple-touch-icon-152x152.png" />
+2x resolution iPhone and other devices: 
+<link rel="apple-touch-icon" href="/apple-touch-icon-120x120.png" />
+basic favicon 
+<link rel="icon" href="/favicon.ico" />
+-->
+<!--Including Links to CSS Styles Sheets-->
+<link rel="stylesheet" href="landing-page-styles.css" />
 
-myButton.onclick = () => {
-  setUserName();
-};
+<!--Linking to Javascript Scripts Sheets-->
+<script src="landing-page-scripts.js" defer></script>
 
- 
-<script src="scripts/main.js"></script>
-<script type="module" src="script.js"></script>
-
-var map = L.map('map').setView([51.505, -0.09], 13);
-
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-L.marker([51.5, -0.09]).addTo(map)
-    .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-    .openPopup();
-
-</body>
-</html>
+</head>
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<!--declaring the type of document (HTML)-->
+<body><h1>My Community Map</h1>
+    <p>My name is Bennett Lovejoy and I am a data-driven policy analyst.</p> 
+    <p>I made this website so that young scholars, teachers, administrators, citizens, researchers, and policymakers alike can interact with data about their community.</p> 
+    <p>The first part of this project focused on economic and social indicators of community wellness. 
+    <h3><strong>On the map below you can click between various layers of the map to see data about Ohio.</strong></h3>
+    </body>
