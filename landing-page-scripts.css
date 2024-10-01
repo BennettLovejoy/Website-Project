@@ -1,0 +1,18 @@
+body {
+    background-color: powderblue;
+  }
+  h1 {
+    color: blue;
+  }
+  p {
+    color: black;
+    border: 2px solid powderblue;
+    padding: 30px;
+    margin: 50px;
+.playfair-display-<mapping> {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: <700>;
+  font-style: normal;
+}
+ }
