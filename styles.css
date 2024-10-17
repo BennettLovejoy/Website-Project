@@ -1,19 +1,21 @@
-p {
-  color: red;
-  width: 500px;
+
+body {
+    background-color: rgb(201, 196, 188);
+  }
+  h1 {
+    color: black;
+  }
+  p {
+    color: black;
+  }
+  .container {
+    margin:0 auto; /* this will center the page */
+    width:960px; /*  use your width here */
+ }
+
+ #map { 
+  height: 400px; 
+  width: 90%;
   border: 1px solid black;
-}
-
-p,
-li,
-h1 {
-  color: red;
-}
-
-@font-face {
-  font-family: 'FAMILY_NAME';
-  font-style: NORMAL_OR_ITALIC;
-  font-weight: NUMERIC_WEIGHT_VALUE;
-  font-display: swap;
-  src: url(FONT_FILE_NAME.woff2) format('woff2');
-}
+  background-color:lightgray;
+  }

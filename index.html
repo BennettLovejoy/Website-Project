@@ -1,126 +1,75 @@
-<!--declaring the type of document (HTML)-->
-<!doctype html>
-<html lang="en-US">
-
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta name="author" content="Bennett Lovejoy" />
-    <meta name="description" content="Community Mapping aims to 
-    provide complete beginners to data analysis and public policy with 
-    a tool that can help them visualize and better understand their communities." />
-    <meta charset="utf-8" />
-    <title>Community Mapping Landing Page</title>
-   
-<!--Including Links to CSS Styles Sheets-->
-<link rel="stylesheet" href="landing-page-styles.css" />
+    <meta charset="UTF-8">
+    <meta name="author" content="Bennett Lovejoy">
+    <title>My Community Map</title>
+    <meta name="description" content="This website is a tool to craft data-driven policy, to get to know your community better, and to make community data available and accessible for all."/>
 
-<!--Linking the Playfair Font-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!--favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-<!--Linking to Leaflet-->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-crossorigin=""/>
+    <!--Linking CSS-->
+    <link rel="stylesheet" src="css/styles.css"/>
 
-<!-- Make sure you put this AFTER Leaflet's CSS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-crossorigin=""></script>
+    <!--Leaflet CSS-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
 
-<!--Linking to MapTiler Basemap-->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<style>
-    #map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
-</style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Community Mapping Landing Page</title>
+     <!--AFTER Leaflet's CSS -->
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
 
+     <!-- My custom JavaScript -->
+     <script src="/Users/bennett-lovejoy/Desktop/launch/js/map.js"></script> 
 
-<!--<I don't have an Icon yet to symbolize my website but I am holding the code here for when I do.
-    link rel="icon" href="favicon.ico" type="image/ohio-icon" />
-    <link rel="icon" href="/favicon-48x48.[some hex hash].png" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.[some hex hash].png" />
+    <!-- PapaParse -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
-// COPYING THIS CODE TO ENSURE ICON COMPATIBILITY WITH APPLE PRODUCTS
-iPad Pro with high-resolution Retina display: 
-<link
-  rel="apple-touch-icon"
-  sizes="167x167"
-  href="/apple-touch-icon-167x167.png" />
-3x resolution iPhone:
-<link
-  rel="apple-touch-icon"
-  sizes="180x180"
-  href="/apple-touch-icon-180x180.png" /> 
-non-Retina iPad, iPad mini, etc.: 
-<link
-  rel="apple-touch-icon"
-  sizes="152x152"
-  href="/apple-touch-icon-152x152.png" />
-2x resolution iPhone and other devices: 
-<link rel="apple-touch-icon" href="/apple-touch-icon-120x120.png" />
-basic favicon 
-<link rel="icon" href="/favicon.ico" />
--->
-
-<!--Linking to Javascript Scripts Sheets-->
-<script src="landing-page-scripts.js" defer></script>
+    <style>
+        #map { 
+            height: 400px; 
+            width: 90%; 
+        }
+    </style>
 
 </head>
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
-<!--declaring the type of document (HTML)-->
 
+<body>
 
-<!--Linking my JS Scripts-->
-<link rel="scripts" href="base-map-scripts.js" />
+    <div id="main"></div>
 
-<body><h1>My Community Map</h1>
-    <p>My name is Bennett Lovejoy and I am a data-driven policy analyst.</p> 
-    <p>I made this website so that young scholars, teachers, administrators, citizens, researchers, and policymakers alike can interact with data about their community.</p> 
-    <p>The first part of this project focused on economic and social indicators of community wellness. 
-    <h3><strong>On the map below you can click between various layers of the map to see data about Ohio.</strong></h3>
+    <h1>My Community Map</h1>
+    <h2>This data was obtained from a variety of sources so 
+        we can better understand what poverty really looks like.
+    </h2>
+    <ol>
+        <li><a href="https://lihtc.huduser.gov/" target="_blank">Low Income Housing Tax Credit</a></li>
+    </ol>
+    <p>My name is Bennett Lovejoy and I am a data-driven public policy analyst. 
+        I use data to amplify the voices of people in my community who need help 
+        most urgently. 
+    </p>
+    
+    <div id="map"></div>
 
-    <div id = "map"></div>
-    <script>
-        var map = L.map('map').setView([39.983334, -82.983330], 7);
-        var osm = L.tileLayer('https://api.maptiler.com/maps/dataviz/{z}/{x}/{y}.png?key=cS67AMfZBa6GygLpCw3R', {
-            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-        }).addTo(map);
-       
-        // Leaflet layer control
-        var baseMaps = {
-            'Open Street Map': osm}        
-        L.control.layers(baseMaps).addTo(map);
-        var ohiocensustracts = L.geoJSON(ohiocensustracts).addTo(map);
+    <p>You can reach Bennett at:</p>
+    <ul>
+        <li><a href="https://www.linkedin.com/in/lovejoybennett/">LinkedIn</a></li>
+        <li><a href="https://medium.com/@lovejoybennett">Medium</a></li>
+        <li><a href="mailto:lovejoybennett@gmail.com">Email</a></li>
+        <li><a href="tel:+16143073351">Phone</a></li>
+    </ul>
 
-    </script>
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQZ50LwFR9odXUysfKXVvBKwHiDPJzA-b6CtW9v5LydMZtpeKKl9fp5ucCbw_BjHZLzeYWSZrvGEqbD/pubhtml?widget=true&amp;headers=false"></iframe>
 
+    <p><strong>Sources:</strong></p>
+    <ol>
+       <li><a href="https://www.flaticon.com/free-icons/carrot" title="carrot icons">Carrot icons created by Freepik - Flaticon</a></li>
+    </ol>
+
+    
 </body>
+</html>
