@@ -5,17 +5,24 @@
     <meta name="author" content="Bennett Lovejoy">
     <title>My Community Map</title>
     <meta name="description" content="This website is a tool to craft data-driven policy, to get to know your community better, and to make community data available and accessible for all."/>
+    <meta name="keywords" content="community map, public policy, poverty, data visualization">
+    <meta name="robots" content="index, follow">
+
 
     <!--favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
     <!--Linking CSS-->
     <link rel="stylesheet" href="../css/styles.css"/>
-    
-    <!--Leaflet CSS-->
+
+    <!--Linking Leaflet CSS-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+     <!--Linking Google Fonts-->
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+
    
 </head>
 
@@ -24,6 +31,8 @@
     <h2>This data was obtained from a variety of sources so 
         we can better understand what poverty really looks like.
     </h2>
+
+    <div class="control-panel"></div>
     <ol>
         <li><a href="https://lihtc.huduser.gov/" target="_blank">Low Income Housing Tax Credit</a></li>
     </ol>
@@ -32,9 +41,10 @@
         most urgently. 
     </p>
 
-    <div id="map"></div>
+    <div id="map" style="height: 500px;"></div>
 
     <p>You can reach Bennett at:</p>
+
     <div class="myContainer">
         <ul class="myUL">
         <li><a href="https://www.linkedin.com/in/lovejoybennett/">LinkedIn</a></li>
@@ -43,7 +53,7 @@
         <li><a href="tel:+16143073351">Phone</a></li>
         </ul>
     </div>
-
+    
     <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQZ50LwFR9odXUysfKXVvBKwHiDPJzA-b6CtW9v5LydMZtpeKKl9fp5ucCbw_BjHZLzeYWSZrvGEqbD/pubhtml?widget=true&amp;headers=false"></iframe>
 
     <p><strong>Sources:</strong></p>
@@ -51,17 +61,14 @@
        <li><a href="https://www.flaticon.com/free-icons/carrot" title="carrot icons">Carrot icons created by Freepik - Flaticon</a></li>
     </ol>
 
-     <!--AFTER Leaflet's CSS -->
-     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
 
      <!-- My custom JavaScript -->
-     <script src="../js/map.js"></script>
+     <script src="../map.js"></script>
 
 
-    <!-- PapaParse -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    
 </body>
 </html>
