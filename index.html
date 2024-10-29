@@ -10,10 +10,10 @@
 
 
     <!--favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" alt="Website Icon"/>
 
     <!--Linking CSS-->
-    <link rel="stylesheet" href="../css/styles.css"/>
+    <link rel="stylesheet" href="./css/styles.css"/>
 
     <!--Linking Leaflet CSS-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -23,7 +23,7 @@
      <!--Linking Google Fonts-->
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 
-   
+  
 </head>
 
 <body>
@@ -32,7 +32,6 @@
         we can better understand what poverty really looks like.
     </h2>
 
-    <div class="control-panel"></div>
     <ol>
         <li><a href="https://lihtc.huduser.gov/" target="_blank">Low Income Housing Tax Credit</a></li>
     </ol>
@@ -41,25 +40,26 @@
         most urgently. 
     </p>
 
-    <div id="map" style="height: 500px;"></div>
+    <div id="map" ></div>
 
     <p>You can reach Bennett at:</p>
 
-    <div class="myContainer">
-        <ul class="myUL">
-        <li><a href="https://www.linkedin.com/in/lovejoybennett/">LinkedIn</a></li>
-        <li><a href="https://medium.com/@lovejoybennett">Medium</a></li>
-        <li><a href="mailto:lovejoybennett@gmail.com">Email</a></li>
-        <li><a href="tel:+16143073351">Phone</a></li>
-        </ul>
-    </div>
-    
-    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQZ50LwFR9odXUysfKXVvBKwHiDPJzA-b6CtW9v5LydMZtpeKKl9fp5ucCbw_BjHZLzeYWSZrvGEqbD/pubhtml?widget=true&amp;headers=false"></iframe>
-
+    <div>
+        <ul class="contacts">
+        <li><a href="https://www.linkedin.com/in/lovejoybennett/" title="Bennett's LinkedIn Profile">LinkedIn</a></li>
+        <li><a href="https://medium.com/@lovejoybennett" title="Bennett's Blog Posts">Medium</a></li>
+        <li><a href="mailto:lovejoybennett@gmail.com" title="Email Bennett">Email</a></li>
+        <li><a href="tel:+16143073351" title="Call Bennett">Phone</a></li>
+   
+    </ul>
+ </div>
     <p><strong>Sources:</strong></p>
     <ol>
        <li><a href="https://www.flaticon.com/free-icons/carrot" title="carrot icons">Carrot icons created by Freepik - Flaticon</a></li>
     </ol>
+
+    <!--Linking to Papa Parse for CSV File Reading-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -67,8 +67,10 @@
     crossorigin=""></script>
 
      <!-- My custom JavaScript -->
-     <script src="../map.js"></script>
-
+     <script src="./js/map.js"></script>
+    
+     <!--Linking Papa Parse-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
 </body>
 </html>
