@@ -55,26 +55,43 @@ Papa.parse("data/school-data/ohioschools.csv", {
 
 // Load and geocode each school, then plot on map
 async function loadSchools(data){
+    console.log("Data passed to loadSchools:", data);
     for (let school of data) {
-        const address = `${school.Address}, ${school.City}, ${school.State} ${school.ZIP}`;
-        const location = await geocodeAddress(address);
+        if (!school) {
+            console.warn("Encoutered null or undefined row in CSV data.");
+            continue;
+        }
+        const students = Number(school.Students) || 0;
+        const teachers = Number(school.Teachers) || 0;
+        const ratio = parseFloat(school.Ratio) || 0;
+        const schoolName = `${school[' Name']}` || 0;
+        const reducedLunch = Number(school.Free) || 0;
+        const freeLunch = Number(school.Reduced) || 0;
+        const address = `${school[' Address'] || school[' Address '] || ''}`.trim();
+        const city = `${school[' City'] || school[' City '] || ''}`.trim();
+        const state = `${school['State'] || school[' State '] || 'OH'}`.trim();
+        const zip = `${school['ZIP'] ||  school[' ZIP'] || ''}`.trim();        
+        const location = await geocodeAddress(`${address}, ${city}, ${state} ${zip}`);
         if (location) {
             L.marker([location.lat, location.lng], {alt: school.Name})
             .addTo(map)
             .bindPopup(`
-                <strong>${school.Name}</strong><br>
-                ${school.Address}, ${school.City}, ${school.State} ${school.ZIP}</br>
-                Students: ${school.Students}, Teachers: ${school.Teachers}</br>
-                Student-to-Teacher Ratio: ${school.Ratio}<br>
-                Free Lunch: ${school.Free}, Reduced: ${school.Reduced}
-                `);
+            <br><strong>School Name: ${school.schoolName}</strong></br>
+            <br>Address: ${schoolName}, ${address}, ${city}, ${state} ${zip}</br>
+            <br>Students: ${students || "N/A"}</br>
+            <br>Teachers: ${teachers || "N/A"}</br>
+            <br>Student-to-Teacher Ratio: ${ratio || "N/A"}</br>
+            <br>Number of Students Receiving Free School Lunch: ${freeLunch || "N/A"}</br>
+            <br>Number of Students Receiving Reduced Price School Lunch: ${reducedLunch || "N/A"}</br>
+            `);
+
         }
     }
 }
 
-async function geocodeAddress(Address) {
-    const apiKey = 'AIzaSyAQFIkUkEXhX4oPYf1-ezT7dnCbr8nHaog';
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(Address)}&key=${apiKey}`;
+async function geocodeAddress(address) {
+    const apiKey = 'MY_API_KEY';
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -90,4 +107,3 @@ async function geocodeAddress(Address) {
         return null;
     }
 }
-
