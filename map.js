@@ -32,13 +32,16 @@ L.marker([39.983334, -82.983330],
 // Loading schools using function
 // Using Papa Parse to load and parse a CSV file with school data
 Papa.parse("data/school-data/ohioschools.csv", {
+    download: true,  // Important for loading external files
     header: true,
     skipEmptyLines: true,
-    encoding: "UTF-8", // Try specifying encoding
-    delimiter: ",", // Explicitly set delimiter
+    encoding: "UTF-8",
+    delimiter: ",",
     complete: function(results) {
-        console.log("Parsed CSV Data Length:", results.data.length); // Add this to see what's being parsed
-        console.log("First Row:", results.errors);
+        console.log("Parsed CSV Data Length:", results.data.length);
+        console.log("First Row:", results.data[0]);
+        console.log("Parsing Errors:", results.errors);
+        
         if (results.data.length > 0) {
             loadSchools(results.data);
         } else {
@@ -46,7 +49,7 @@ Papa.parse("data/school-data/ohioschools.csv", {
         }
     },
     error: function(error) {
-        console.error("Papa Parse Error:", error); // Add error logging
+        console.error("Papa Parse Error:", error);
     }
 });
 
