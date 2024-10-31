@@ -65,8 +65,8 @@ async function loadSchools(data){
         const teachers = Number(school.Teachers) || 0;
         const ratio = parseFloat(school.Ratio) || 0;
         const schoolName = `${school[' Name']}` || 0;
-        const reducedLunch = Number(school.Free) || 0;
-        const freeLunch = Number(school.Reduced) || 0;
+        const reducedLunch = `${school['Reduced ']}` || 0;
+        const freeLunch =  `${school['Free ']}` || 0;
         const address = `${school[' Address'] || school[' Address '] || ''}`.trim();
         const city = `${school[' City'] || school[' City '] || ''}`.trim();
         const state = `${school['State'] || school[' State '] || 'OH'}`.trim();
@@ -76,7 +76,7 @@ async function loadSchools(data){
             L.marker([location.lat, location.lng], {alt: school.Name})
             .addTo(map)
             .bindPopup(`
-            <br><strong>School Name: ${school.schoolName}</strong></br>
+            <br><strong>School Name: ${schoolName}</strong></br>
             <br>Address: ${schoolName}, ${address}, ${city}, ${state} ${zip}</br>
             <br>Students: ${students || "N/A"}</br>
             <br>Teachers: ${teachers || "N/A"}</br>
@@ -90,7 +90,7 @@ async function loadSchools(data){
 }
 
 async function geocodeAddress(address) {
-    const apiKey = 'MY_API_KEY';
+    const apiKey = 'AIzaSyAQFIkUkEXhX4oPYf1-ezT7dnCbr8nHaog';
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
     try {
         const response = await fetch(url);
