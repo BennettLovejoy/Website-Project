@@ -5,29 +5,18 @@ body {
 }
 
 .header {
-    background: #2c3e50;
-    color: white;
+    background: solid black;
+    color: solid black;
     padding: 1rem;
     text-align: center;
 }
 
-.map { 
+#map { 
     height: 500px;
     width: 90%;
     margin: auto;
 }
 
-.control-panel {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    background: white;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    max-width: 300px;
-}
 
 .data-visualization {
     position: absolute;
@@ -41,13 +30,22 @@ body {
     max-width: 400px;
 }
 
+.contacts{
+    border: 1px solid black;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: auto;
+    text-align: center;
+    fill: rgb(175, 125, 59);
+
+}
+
 .content-section {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
-.data-sources, .contact-info {
+.data-sources {
     background: #f8f9fa;
     padding: 2rem;
     border-radius: 8px;
@@ -55,13 +53,14 @@ body {
 }
 
 h2 {
-    color: #2c3e50;
+    color: solid black;
     margin-bottom: 1rem;
 }
 
-ul {
+ul, ol {
     list-style-type: none;
     padding: 0;
+    text-align: center;
 }
 
 li {
@@ -77,9 +76,7 @@ a:hover {
     text-decoration: underline;
 }
 
-#myUL {
-    border: 1px solid black;
-}
+
 .myUL li{
     border: 1px solid black;
     padding: 0.5rem;
@@ -88,8 +85,17 @@ a:hover {
 }
 h1, h2, p {
     margin-bottom: 20px;
+    text-align: center;
 }
 .myContainer, #map {
     box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
     border-radius: 8px;
   }
+
+  a {
+    transition: color 0.3s ease-in-out;
+  }
+  a:hover {
+    color: #229c6b; /* Example hover color */
+  }
+

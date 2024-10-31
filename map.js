@@ -1,5 +1,5 @@
 
-// DON'T FUCKING TOUCH THIS !!!
+// DON'T TOUCH THIS !!!
 var map = L.map('map').setView([39.983334, -82.983330], 9);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
@@ -30,36 +30,51 @@ L.marker([39.983334, -82.983330],
     map.on('click', onMapClick);
 
 // Loading schools using function
+// Using Papa Parse to load and parse a CSV file with school data
+Papa.parse("data/school-data/ohioschools.csv", {
+    header: true,
+    skipEmptyLines: true,
+    encoding: "UTF-8", // Try specifying encoding
+    delimiter: ",", // Explicitly set delimiter
+    complete: function(results) {
+        console.log("Parsed CSV Data Length:", results.data.length); // Add this to see what's being parsed
+        console.log("First Row:", results.errors);
+        if (results.data.length > 0) {
+            loadSchools(results.data);
+        } else {
+            console.error("No data parsed from CSV")
+        }
+    },
+    error: function(error) {
+        console.error("Papa Parse Error:", error); // Add error logging
+    }
+});
 
-function loadCSV(file){
-    console.log("Starting CSV load from:", file);
-    return new Promise((resolve, reject) => {
-        Papa.parse(file, {
-            header:true,
-            download: true,
-            complete: function(results) {
-                console.log("CSV successfully loaded. First row:", results.data[0]);
-                console.log("Total rows:", results.data.length);
-                resolve(results.data);
-            },
-            error: function(error) {
-                console.error("CSV loading error:", error);
-                reject(error);
-            }
-        });
-    });
-
+// Load and geocode each school, then plot on map
+async function loadSchools(data){
+    for (let school of data) {
+        const address = `${school.Address}, ${school.City}, ${school.State} ${school.ZIP}`;
+        const location = await geocodeAddress(address);
+        if (location) {
+            L.marker([location.lat, location.lng], {alt: school.Name})
+            .addTo(map)
+            .bindPopup(`
+                <strong>${school.Name}</strong><br>
+                ${school.Address}, ${school.City}, ${school.State} ${school.ZIP}</br>
+                Students: ${school.Students}, Teachers: ${school.Teachers}</br>
+                Student-to-Teacher Ratio: ${school.Ratio}<br>
+                Free Lunch: ${school.Free}, Reduced: ${school.Reduced}
+                `);
+        }
+    }
 }
-   
-async function geocodeAddress(Address) {
 
+async function geocodeAddress(Address) {
     const apiKey = 'AIzaSyAQFIkUkEXhX4oPYf1-ezT7dnCbr8nHaog';
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(Address)}&key=${apiKey}`;
-   
     try {
         const response = await fetch(url);
         const data = await response.json();
-
         if (data.status === "OK") {
             const location = data.results[0].geometry.location;
             return { lat: location.lat, lng: location.lng };
@@ -72,61 +87,4 @@ async function geocodeAddress(Address) {
         return null;
     }
 }
-
-
- // Plot school data on the map
-async function plotSchoolData(file) {
-    try {
-        console.log("Starting to load CSV from", file);
-        const schoolData = await loadCSV(file);
-
-        // Debug: Log the first row of data
-        console.log("First row of school data:", schoolData[0]);
-        // Debug: Log all column names
-        console.log("Available Columns:", Object.keys(schoolData[0]));
-
-        for (const school of schoolData){
-            // Debug logging
-            console.log("Processing school data:", {
-                name: school['Name'],
-                address: school['Address'],
-                city: school ['City'],
-                state: school['State'],
-                zip: school['ZIP']
-            });
-
-            // Check if we have all required fields
-            if (!school['Address'] || !school['City'] || !school['State'] ||!school['ZIP']) {
-                console.warn("Missing address information for school: ", {
-                    address: school['Address'],
-                    city: school['City'],
-                    state: school['State'],
-                    zip: school['ZIP']
-                });
-                continue;
-            }
-            
-            const address = `${school['Address']}, ${school['City']}, ${school['State']}, ${school['ZIP']}`;
-            console.log("Processing address:", address);
-
-            const coords = await geocodeAddress(address);
-            console.log("Received coordinates:", coords);
-
-            if (coords) {
-                console.log("Adding marker at:", coords.lat, coords.lng);
-                L.marker([coords.lat, coords.lng])
-                    .addTo(map)
-                    .bindPopup(`<strong>${school['Name']}</strong><br>${address}`);
-            }
-        }
-
-    } catch (error) {
-        console.error("Error in plotting school data:", error);
-        console.error("Error details:", error.message);
-    }
-}
-
-// Update the CSV file path as needed for your setup
-plotSchoolData('/data/school-data/ohioschools.csv');
-
 
