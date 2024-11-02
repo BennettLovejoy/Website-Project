@@ -42,7 +42,7 @@ L.control.zoom({
 // Add layer control with custom styling
 var layerControl = L.control.layers(baseMaps, null, {
     position: 'topright',
-    collapsed: false
+    collapsed: true,
 }).addTo(map);
 
 
@@ -82,20 +82,31 @@ Papa.parse("data/school-data/ohioschools.csv", {
     }
 });
 
-function getSchoolIcon(studentCount) {
-    const color = studentCount > 1000 ? 'red' : 
-                 studentCount > 500 ? 'orange' : 
-                 'blue';
-                 
-    return L.icon({
+function getSchoolIcon(studentsCount) {
+    let color;
+
+    if (studentsCount >= 301) {
+        color = 'red';
+        iconSize = [25, 41];
+    } else if (studentsCount <= 300) {
+        color = 'green';
+        iconSize = [20, 36];
+    } else {
+        color = 'blue';
+        izonSize = [15, 31];
+    }
+
+    return new L.Icon({
         iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-        iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
         shadowSize: [41, 41]
     });
 }
+
+
+
 
 
 // Load and geocode each school, then plot on map
