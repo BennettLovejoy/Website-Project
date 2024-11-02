@@ -1,21 +1,50 @@
-
 // DON'T TOUCH THIS !!!
-var map = L.map('map').setView([39.983334, -82.983330], 9);
+var map = L.map('map', {
+    zoom: 9,
+    zoomControl: false
+});
+map.setView([39.983334, -82.983330], 9);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+const schoolIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+// Custom tile layer styling
+const mapStyle = {
+    default: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    dark: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+    light: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
+    satellite: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+};
+
+// Map Attribution
+const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+// Initialize Map
+L.tileLayer(mapStyle.light, { attribution }).addTo(map);
 
 var baseMaps = {
-    "Street View": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'),
-    "Satellite View": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')
+    "Light Mode": L.tileLayer(mapStyle.light, { attribution }),
+    "Dark Mode": L.tileLayer(mapStyle.dark, { attribution }),
+    "Satellite": L.tileLayer(mapStyle.satellite, { attribution })
 };
-L.control.layers(baseMaps).addTo(map);
 
+// Move Zoom Control to bottom right corner of map
+L.control.zoom({
+    position: 'topleft'
+}).addTo(map);
 
-// Test marker
-L.marker([39.983334, -82.983330], 
-    {alt: 'First'}).addTo(map) // "First" is the accessible name of this marker
-    .bindPopup('Bennett Learning About Popups!')
-    .openPopup(); 
+// Add layer control with custom styling
+var layerControl = L.control.layers(baseMaps, null, {
+    position: 'topright',
+    collapsed: false
+}).addTo(map);
+
 
 // If a user clicks on a part of the map without an icon, now the latitude and longitutde will appear. 
     var popup = L.popup();
@@ -53,6 +82,22 @@ Papa.parse("data/school-data/ohioschools.csv", {
     }
 });
 
+function getSchoolIcon(studentCount) {
+    const color = studentCount > 1000 ? 'red' : 
+                 studentCount > 500 ? 'orange' : 
+                 'blue';
+                 
+    return L.icon({
+        iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+}
+
+
 // Load and geocode each school, then plot on map
 async function loadSchools(data){
     console.log("Data passed to loadSchools:", data);
@@ -65,24 +110,28 @@ async function loadSchools(data){
         const teachers = Number(school.Teachers) || 0;
         const ratio = parseFloat(school.Ratio) || 0;
         const schoolName = `${school[' Name']}` || 0;
-        const reducedLunch = `${school['Reduced ']}` || 0;
-        const freeLunch =  `${school['Free ']}` || 0;
+        const reducedLunch = `${school[' Reduced '] || 0}`.trim();
+        const freeLunch =  `${school[' Free '] || 0}`.trim();
         const address = `${school[' Address'] || school[' Address '] || ''}`.trim();
         const city = `${school[' City'] || school[' City '] || ''}`.trim();
-        const state = `${school['State'] || school[' State '] || 'OH'}`.trim();
-        const zip = `${school['ZIP'] ||  school[' ZIP'] || ''}`.trim();        
+        const state = `${school[' State'] || school[' State '] || 'OH'}`.trim();
+        const zip = `${school[' ZIP'] ||  school[' ZIP'] || ''}`.trim();        
+
         const location = await geocodeAddress(`${address}, ${city}, ${state} ${zip}`);
         if (location) {
-            L.marker([location.lat, location.lng], {alt: school.Name})
-            .addTo(map)
+            const icon = getSchoolIcon(school.Students);
+            L.marker([location.lat, location.lng], {
+                icon: schoolIcon,
+                alt: school.Name
+            }).addTo(map)
             .bindPopup(`
-            <br><strong>School Name: ${schoolName}</strong></br>
-            <br>Address: ${schoolName}, ${address}, ${city}, ${state} ${zip}</br>
-            <br>Students: ${students || "N/A"}</br>
-            <br>Teachers: ${teachers || "N/A"}</br>
-            <br>Student-to-Teacher Ratio: ${ratio || "N/A"}</br>
-            <br>Number of Students Receiving Free School Lunch: ${freeLunch || "N/A"}</br>
-            <br>Number of Students Receiving Reduced Price School Lunch: ${reducedLunch || "N/A"}</br>
+            <br>School: <strong>${schoolName}</strong></br>
+            <br>Address: <strong>${address}, ${city}, ${state} ${zip}</strong></br>
+            <br>Students: <strong>${students || "N/A"}</strong></br>
+            <br>Teachers: <strong>${teachers || "N/A"}</strong></br>
+            <br>Student-to-teacher ratio: <strong>${ratio || "N/A"}</strong></br>
+            <br>Students receiving free school lunch: <strong>${freeLunch ||"N/A"}</strong></br>
+            <br>Students receiving reduced price school lunch: <strong>${reducedLunch || "N/A"}</strong></br>
             `);
 
         }
@@ -107,3 +156,4 @@ async function geocodeAddress(address) {
         return null;
     }
 }
+
