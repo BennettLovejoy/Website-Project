@@ -92,8 +92,11 @@ async function loadSchools(data){
         const state = (school[' State']);
         const zip = (school[' ZIP']);
 
-        const location = geocodeAddress(`${address},${city},${state}`);
-
+        const location = await geocodeAddress(`${address},${city},${state},${zip}`);
+        if (!location) {
+            console.warn(`Geocoding failed for: ${address}, ${city}, ${state},${zip}`);
+            continue;
+        }
         if (location) {
             L.marker([location.lat, location.lng], {
                 icon: L.icon({ iconUrl: 'school.ico', iconSize: [25, 25] }),
@@ -101,21 +104,15 @@ async function loadSchools(data){
             }).addTo(map)
             .bindPopup(`
             <br>School: <strong>${schoolName}</strong><br>
-            <br>Address: <strong>${address}, ${city}, ${state} ${zip}</strong><br>
-            <br>Students: <strong>${students || "N/A"}</strong><br>
-            <br>Teachers: <strong>${teachers || "N/A"}</strong><br>
-            <br>Student-to-teacher ratio: <strong>${ratio || "N/A"}</strong><br>
-            <br>Students receiving free school lunch: <strong>${freeLunch ||"N/A"}</strong><br>
-            <br>Students receiving reduced price school lunch: <strong>${reducedLunch || "N/A"}</strong><br>
-            `);
+          `);
 
         }
     }
 }
 
 async function geocodeAddress(address) {
-    const apiKey = 'AIzaSyAQFIkUkEXhX4oPYf1-ezT7dnCbr8nHaog';
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}&sensor=true`;
+    const url = `https://nominatim.openstreetmap.org/search?<street,city,state,postalcode>`;
+
 
     try {
         const response = await fetch(url);

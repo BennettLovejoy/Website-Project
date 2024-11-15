@@ -8,9 +8,8 @@
     <meta name="keywords" content="community map, public policy, poverty, data visualization">
     <meta name="robots" content="index, follow">
 
-
     <!--favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon" alt="Website Icon"/>
+    <link rel="icon" href="images/CEJC/cejc.jpg" type="image/x-icon" alt="Website Icon"/>
 
     <!--Linking CSS-->
     <link rel="stylesheet" href="css/styles.css"/>
@@ -21,13 +20,31 @@
      crossorigin=""/>
 
      <!--Linking Google Fonts-->
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"> 
 
-  
+
+     <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        th, td {
+          padding: 8px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+        
+        tr:hover {background-color: coral;}
+        </style>
+        </head>
+        <body>
+        
 </head>
 
 <body>
-    <h1>My Community Map</h1>
+    <div class="sticky"><h1>Columbus Education Justice Coalition</h1></div>
+
     <h2>This data was obtained from a variety of sources so 
         we can better understand what poverty really looks like.
     </h2>
@@ -40,7 +57,49 @@
         most urgently. 
     </p>
 
+
+    <div id="data-refresh-container"></div>
+
+    <button id="refreshDataButton">Refresh Data</button>
+
+
     <div id="map" name="Ohio Schools and Basic Information"></div>
+
+    <h2>Data Breakdown</h2>
+        
+        <p>Move the mouse over the table rows to see more.</p>
+        
+        <table>
+
+          <tr>
+            <th>School Name</th>
+            <th>School Address</th>
+            <th>Lowest Grade</th>
+            <th>Highest Grade</th>
+          </tr>
+          <tr>
+            <td>Peter</td>
+            <td>Griffin</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>Lois</td>
+            <td>Griffin</td>
+            <td>$150</td>
+          </tr>
+          <tr>
+            <td>Joe</td>
+            <td>Swanson</td>
+            <td>$300</td>
+          </tr>
+          <tr>
+            <td>Cleveland</td>
+            <td>Brown</td>
+            <td>$250</td>
+          </tr>
+        </table>
+        <caption>caption here!</caption>
+
 
     <p>You can reach Bennett at:</p>
 
@@ -66,8 +125,16 @@
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
 
+
      <!-- My custom JavaScript -->
      <script src="js/map.js"></script>
 
+     <!--Server Javascript-->
+     <script src="server.js"></script>
+
+     <!--Geocoding Script-->
+     <script src="main.js"></script>
+
+    
 </body>
 </html>
