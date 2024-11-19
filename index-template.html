@@ -10,6 +10,7 @@
 
     <!--favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon" alt="Website Icon"/>
+    <a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a>
 
     <!--Linking CSS-->
     <link rel="stylesheet" href="styles.css"/>
@@ -22,99 +23,67 @@
      <!--Linking Google Fonts-->
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"> 
 
-
-     <style>
-        table {
-          border-collapse: collapse;
-          width: 100%;
-        }
-        
-        th, td {
-          padding: 8px;
-          text-align: left;
-          border-bottom: 1px solid #ddd;
-        }
-        
-        tr:hover {background-color: coral;}
-        </style>
-        </head>
-        <body>
-        
 </head>
 
 <body>
-    <div class="sticky"><h1>Columbus Education Justice Coalition</h1></div>
 
-    <h2>This data was obtained from a variety of sources so 
-        we can better understand what poverty really looks like.
-    </h2>
 
+    <header>
+        <h1>Columbus Education Justice Coalition</h1>
+        <nav>
+            <ul>
+                <li><a href="#map">Community Wellness Map</a></li>
+                <li><a href="#data-breakdown">Understand the Data</a></li>
+                <li><a href="#contact">Contact CEJC</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="w3-container"> 
+
+  
+    <main>
+        <section id="hero">
+          <div class="container py-5">
+            <h1>We're giving the power to the community.</h1>
+            <p class="lead">We are parents, students, educators, school staff, neighbors, and community partners. This is our city. These are our schools.</p>
+            <p>Our priorities are Relationships, Reinvestment, and Reconstruction.</p>
+          </div>
+        </section>
+
+        <section id="map">
+            <div class="container my-5">
+              <h2>Community Wellness Map</h2>
+              <div id="map-container"></div>
+            </div>
+          </section>
+        </div> 
+
+
+        <section id="data-breakdown">
+          <div class="container my-5">
+              <h2>Understand the Data</h2>
+              <!-- The JavaScript will populate the table here -->
+          </div>
+      </section>
+          
+
+  <section id="contact">
+    <div class="w3-container"> 
+      <h2>Contact CEJC</h2>
+      <ul class="list-unstyled">
+        <li><a href="https://linktr.ee/cbusedjustice">CEJC LinkTree</a></li>
+        <li><a href="https://linktr.us21.list-manage.com/subscribe?u=bd21c8534a113695903d71916&id=912cacc6c4">Join Our Mailing List</a></li>
+        <li><a href="https://forms.gle/LahPiENBuLsf36tHA">Join Board Watch!</a></li>
+        <li><a href="https://tr.ee/BaEjkPzIcB">Buy Merch on the CEJC Bonfire Store Front</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<h4>Sources</h4>
     <ol>
         <li><a href="https://lihtc.huduser.gov/" target="_blank">Low Income Housing Tax Credit</a></li>
-    </ol>
-    <p>My name is Bennett Lovejoy and I am a data-driven public policy analyst. 
-        I use data to amplify the voices of people in my community who need help 
-        most urgently. 
-    </p>
-
-
-    <div id="data-refresh-container"></div>
-
-    <button id="refreshDataButton">Refresh Data</button>
-
-
-    <div id="map" name="Ohio Schools and Basic Information"></div>
-
-    <h2>Data Breakdown</h2>
-        
-        <p>Move the mouse over the table rows to see more.</p>
-        
-        <table>
-
-          <tr>
-            <th>School Name</th>
-            <th>School Address</th>
-            <th>Lowest Grade</th>
-            <th>Highest Grade</th>
-          </tr>
-          <tr>
-            <td>Peter</td>
-            <td>Griffin</td>
-            <td>$100</td>
-          </tr>
-          <tr>
-            <td>Lois</td>
-            <td>Griffin</td>
-            <td>$150</td>
-          </tr>
-          <tr>
-            <td>Joe</td>
-            <td>Swanson</td>
-            <td>$300</td>
-          </tr>
-          <tr>
-            <td>Cleveland</td>
-            <td>Brown</td>
-            <td>$250</td>
-          </tr>
-        </table>
-        <caption>caption here!</caption>
-
-
-    <p>You can reach Bennett at:</p>
-
-    <div>
-        <ul class="contacts">
-        <li><a href="https://www.linkedin.com/in/lovejoybennett/" title="Bennett's LinkedIn Profile">LinkedIn</a></li>
-        <li><a href="https://medium.com/@lovejoybennett" title="Bennett's Blog Posts">Medium</a></li>
-        <li><a href="mailto:lovejoybennett@gmail.com" title="Email Bennett">Email</a></li>
-        <li><a href="tel:+16143073351" title="Call Bennett">Phone</a></li>
-   
-    </ul>
- </div>
-    <p><strong>Sources:</strong></p>
-    <ol>
-       <li><a href="https://www.flaticon.com/free-icons/carrot" title="carrot icons">Carrot icons created by Freepik - Flaticon</a></li>
     </ol>
         
      <!--Linking Papa Parse-->
@@ -126,16 +95,17 @@
      crossorigin=""></script>
 
 
-     <!-- My custom JavaScript -->
-     <script src="js/map.js"></script>
-     <script src="js/map2.js"></script>
-
-     <!--Server Javascript-->
-     <script src="server.js"></script>
-
-     <!--Geocoding Script-->
-     <script src="main.js"></script>
-
+      <script src="js/data.js"></script>
+      <script src="js/geocode.js"></script>
+      <script src="js/map_.js"></script>
+      <script src="js/markers.js"></script>
+      <script src="js/main.js"></script>
+      <script src="js/table.js"></script>
     
 </body>
-</html>
+<footer class="bg-dark text-white py-3">
+    <div class="container">
+      <p class="mb-0">&copy; 2024 Columbus Education Justice Coalition. All rights reserved.</p>
+    </div>
+  </footer>
+  </html>
